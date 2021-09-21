@@ -186,7 +186,6 @@ $(document).ready(function(){
 		$('#myTable').empty();
 		$( document ).ready(function() {
 				showbysearch().then(results => {
-					console.log(results);
 					buildTable(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -228,7 +227,16 @@ $(document).on('click','#add',function(){
 				success: function(dataResult){
 					var dataResult = JSON.parse(dataResult);
 					if(dataResult.statusCode==200){
-						alert("requested");
+						alert("Request has been Sent, Check Your Pending Requests");
+						
+						$('#myTable').empty();
+						$( document ).ready(function() {
+								showbysearch().then(results => {
+									buildTable(results);
+								}).catch(error => {
+									console.log(error.message);
+								})
+							});
 					
 					}
 					else if(dataResult.statusCode==201){
@@ -272,7 +280,6 @@ $(document).on('click','#block',function(){
 						$('#myTable').empty();
 						$( document ).ready(function() {
 								showbysearch().then(results => {
-									console.log(results);
 									buildTable(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -293,7 +300,6 @@ $(document).on('click','#block',function(){
 						$('#noti').empty();
 						$( document ).ready(function() {
 								shownoti().then(results => {
-									console.log(results);
 									buildnoti(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -332,7 +338,6 @@ async function shownoti(){
 }
 $( document ).ready(function() {
 				shownoti().then(results => {
-					console.log(results);
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -343,7 +348,6 @@ $(document).ready(function(){
 $(document).on('click','#showallnoti',function(){
 	$('#noti').empty();
 	showallnoti().then(results => {
-					console.log(results);
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);

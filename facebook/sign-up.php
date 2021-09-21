@@ -1,8 +1,12 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <title>Facebook - login or signup</title>
   <link rel="stylesheet" type="text/css" href="css/styles.css">
+  
 </head>
 <body>
   <nav class="navbar">
@@ -20,12 +24,28 @@
   <div class="signup_body">
     <p class="acc_crt">Create an account</p>
     <p class="free_hint">It's free and always will be.</p>
-    <form class="signup_form" method = "post" action="php/signup.php">
+    <form class="signup_form" id="registration" method = "post" action="php/signup.php">
       <div>
-        <input class="firstname" type="text" name="first_name" placeholder="First name">
-        <input class="lastname" type="text" name="last_name" placeholder="Last name">
+        <input type="text" name="first_name" placeholder="First name" class="firstname" required>
+        <input type="text" name="last_name" placeholder="Last name" class="lastname" required>
+		<?php
+					/* If email is already taken, print a danger alert that tells "email is already taken"*/
+                    if (!empty($_SESSION["flash"])){
+					?>
+					<div class="alert alert-warning" role="alert">
+					<?php
+                    $x = $_SESSION["flash"];
+                    echo $x;
+					$_SESSION["flash"] = "";
+					
+				
+					?>
+					</div>
+					<?php
+					}
+					?>
         <input class="email" type="text" name="email" placeholder="Mobile number or Email">
-        <input class="password" type="password" name="password" placeholder="Password">
+        <input id="password" class="password" type="password" name="password" placeholder="Password">
         <input class="password2" type="password" name="confirmPassword" placeholder="Confirm password">
       </div>
       <p class="birthday">Birthday</p>
@@ -46,6 +66,9 @@
   </div>
 
   </section>
-
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  	<script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.17.0/dist/jquery.validate.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="js/register.js"></script>
 </body>
 </html>

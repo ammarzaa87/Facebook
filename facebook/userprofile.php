@@ -104,7 +104,7 @@ if(empty($_SESSION['u_id'])){
 
 			$( document ).ready(function() {
 				showinfo().then(results => {
-					console.log(results);
+					
 					buildinfo(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -121,8 +121,9 @@ if(empty($_SESSION['u_id'])){
 							<ul id="myinfo">
 							
 								<li><strong>Name: </strong>${data[i].first_name} ${data[i].last_name}</li>
-								<li><strong>City: </strong>Boston</li>
-								<li><strong>State: </strong>Massachusetts</li>
+								<li><strong>City: </strong>${data[i].city}</li>
+								<li><strong>Region: </strong>${data[i].region}</li>
+								<li><strong>Country: </strong>${data[i].country}</li>
 								<li><strong>Gender: </strong>${data[i].gender}</li>
 								<li><strong>DOB: </strong>${data[i].birth}</li>
 							</ul>

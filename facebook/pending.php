@@ -133,7 +133,6 @@ if(empty($_SESSION['u_id'])){
 
 			$( document ).ready(function() {
 				showpending().then(results => {
-					console.log(results);
 					buildTable(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -215,7 +214,7 @@ $(document).on('click','#rmv',function(){
 						$('#myTable').empty();
 						$( document ).ready(function() {
 								showpending().then(results => {
-									console.log(results);
+									
 									buildTable(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -224,7 +223,7 @@ $(document).on('click','#rmv',function(){
 						$('#noti').empty();
 						$( document ).ready(function() {
 							shownoti().then(results => {
-								console.log(results);
+								
 								buildnoti(results);
 							}).catch(error => {
 								console.log(error.message);
@@ -271,7 +270,7 @@ $(document).on('click','#block',function(){
 						$('#myTable').empty();
 						$( document ).ready(function() {
 								showpending().then(results => {
-									console.log(results);
+									
 									buildTable(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -292,7 +291,7 @@ $(document).on('click','#block',function(){
 						$('#noti').empty();
 						$( document ).ready(function() {
 								shownoti().then(results => {
-									console.log(results);
+									
 									buildnoti(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -331,7 +330,7 @@ async function shownoti(){
 }
 $( document ).ready(function() {
 				shownoti().then(results => {
-					console.log(results);
+				
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -342,7 +341,7 @@ $(document).ready(function(){
 $(document).on('click','#showallnoti',function(){
 	$('#noti').empty();
 	showallnoti().then(results => {
-					console.log(results);
+					
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);

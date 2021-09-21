@@ -121,7 +121,6 @@ if(empty($_SESSION['u_id'])){
 
 			$( document ).ready(function() {
 				showfriends().then(results => {
-					console.log(results);
 					buildTable(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -185,10 +184,7 @@ $(document).on('click','#remv',function(){
 					if(dataResult.statusCode==200){
 					var ffname = dataResult.ffname;
 					var flname= dataResult.flname;
-					console.log(ffname);
-					console.log(flname);
 					var message = "You removed "+ffname+" "+flname+" From your Friends List";
-					console.log(message);
 						$.ajax({
 				url: "php/addnotification.php",
 				type: "POST",
@@ -204,7 +200,6 @@ $(document).on('click','#remv',function(){
 						$('#noti').empty();
 						$( document ).ready(function() {
 							shownoti().then(results => {
-								console.log(results);
 								buildnoti(results);
 							}).catch(error => {
 								console.log(error.message);
@@ -221,7 +216,6 @@ $(document).on('click','#remv',function(){
 				$('#myTable').empty();  
 				$( document ).ready(function() {
 				showfriends().then(results => {
-					console.log(results);
 					buildTable(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -260,7 +254,6 @@ $(document).on('click','#block',function(){
 						$('#myTable').empty();
 						$( document ).ready(function() {
 								showfriends().then(results => {
-									console.log(results);
 									buildTable(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -281,7 +274,6 @@ $(document).on('click','#block',function(){
 						$('#noti').empty();
 						$( document ).ready(function() {
 								shownoti().then(results => {
-									console.log(results);
 									buildnoti(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -320,7 +312,6 @@ async function shownoti(){
 }
 $( document ).ready(function() {
 				shownoti().then(results => {
-					console.log(results);
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -331,7 +322,6 @@ $(document).ready(function(){
 $(document).on('click','#showallnoti',function(){
 	$('#noti').empty();
 	showallnoti().then(results => {
-					console.log(results);
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);

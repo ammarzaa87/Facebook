@@ -133,7 +133,7 @@ if(empty($_SESSION['u_id'])){
 
 			$( document ).ready(function() {
 				showrequests().then(results => {
-					console.log(results);
+					
 					buildTable(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -215,7 +215,7 @@ $(document).on('click','#acc',function(){
 						$('#myTable').empty();
 						$( document ).ready(function() {
 								showrequests().then(results => {
-									console.log(results);
+									
 									buildTable(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -245,7 +245,7 @@ $(document).on('click','#acc',function(){
 						$('#noti').empty();
 						$( document ).ready(function() {
 							shownoti().then(results => {
-								console.log(results);
+								
 								buildnoti(results);
 							}).catch(error => {
 								console.log(error.message);
@@ -294,7 +294,7 @@ $(document).on('click','#block',function(){
 						$('#myTable').empty();
 						$( document ).ready(function() {
 								showrequests().then(results => {
-									console.log(results);
+									
 									buildTable(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -315,7 +315,7 @@ $(document).on('click','#block',function(){
 						$('#noti').empty();
 						$( document ).ready(function() {
 								shownoti().then(results => {
-									console.log(results);
+									
 									buildnoti(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -376,7 +376,7 @@ $(document).on('click','#dec',function(){
 						$('#myTable').empty();
 						$( document ).ready(function() {
 								showrequests().then(results => {
-									console.log(results);
+									
 									buildTable(results);
 								}).catch(error => {
 									console.log(error.message);
@@ -385,7 +385,7 @@ $(document).on('click','#dec',function(){
 						$('#noti').empty();
 						$( document ).ready(function() {
 							shownoti().then(results => {
-								console.log(results);
+								
 								buildnoti(results);
 							}).catch(error => {
 								console.log(error.message);
@@ -422,7 +422,7 @@ async function shownoti(){
 }
 $( document ).ready(function() {
 				shownoti().then(results => {
-					console.log(results);
+					
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -433,7 +433,7 @@ $(document).ready(function(){
 $(document).on('click','#showallnoti',function(){
 	$('#noti').empty();
 	showallnoti().then(results => {
-					console.log(results);
+					
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);

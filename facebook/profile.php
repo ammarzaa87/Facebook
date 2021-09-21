@@ -24,6 +24,42 @@ if(empty($_SESSION['u_id'])){
   </head>
 
   <body>
+  <input type="hidden" id="itemid">
+  
+  <!-- Modal For Edit -->
+<div class="modal fade" id="EditModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Edit Profile</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+	  
+	<div class="modal-body">
+        <input id="fname" type="text" class="form-control" placeholder="First Name">
+      </div>
+	  <div class="modal-body">
+        <input id="lname" type="text" class="form-control" placeholder="Last Name">
+      </div>
+	  
+      
+	  <div class="modal-body">
+	  Birthday
+	  <input id="editdate" type="date" class="form-control" placeholder="Edit Date">
+	  </div>
+	  
+						
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button id="butedit" name="submit" type="button" class="btn btn-primary">Save changes</button>
+      </div>
+	  
+    </div>
+  </div>
+</div>
+
 <input type="hidden" id="u_id" name="u_id" value="<?php echo $u_id?>">
 
     <nav class="navbar navbar-default">
@@ -141,10 +177,10 @@ if(empty($_SESSION['u_id'])){
 				return results; 
 			}
 			
-
+			
 			$( document ).ready(function() {
 				showinfo().then(results => {
-					console.log(results);
+					
 					buildinfo(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -156,7 +192,21 @@ if(empty($_SESSION['u_id'])){
 		for (var i = 0; i < data.length; i++){
 			var row = ` <div class="col-md-4">
 							<img src="img/user.png" class="img-thumbnail" alt="">
+						<div class="modal-body">
+                            <div class="name">Upload Profile picture</div>
+                            <div class="value">
+                                <div class="input-group js-input-file">
+                                    <input type="file" name="my_image" >
+                                    <label class="label--file" for="file"></label>
+                                    
+                                </div>
+								
+                                <div class="label--desc">This image will appear to the users as a profile for your Page</div>
+                            </div>
+						</div>
+
 							</div>
+							
 							<div class="col-md-8">
 							<ul id="myinfo">
 							
@@ -167,6 +217,7 @@ if(empty($_SESSION['u_id'])){
 								<li><strong>Country: </strong>${data[i].country}</li>
 								<li><strong>Gender: </strong>${data[i].gender}</li>
 								<li><strong>DOB: </strong>${data[i].birth}</li>
+								<a data-toggle="modal" data-target="#EditModal" class="btn btn-primary">Edit Profile</a>
 								<input type="hidden" id="a_id" name="a_id" data-id="${data[i].address_id}">
 							</ul>
 						</div>`
@@ -199,7 +250,7 @@ $(document).on('click','#edit',function(){
 					$('#myinfo').empty();
 					$( document ).ready(function() {
 						showinfo().then(results => {
-					console.log(results);
+					
 					buildinfo(results);
 					}).catch(error => {
 					console.log(error.message);
@@ -219,6 +270,49 @@ $(document).on('click','#edit',function(){
 });
 
 
+$('#butedit').on('click', function() {
+	var id = $('#u_id').val();
+	var fname = $('#fname').val();
+	var lname = $('#lname').val();
+	var date = $('#editdate').val();
+		if(date!="" && fname!="" && lname!=""){
+			$.ajax({
+				url: "php/updateprofile.php",
+				type: "POST",
+				data: {
+					id:id,
+					fname:fname,
+					lname:lname,
+					date: date,
+					
+				},
+				cache: false,
+				success: function(dataResult){
+					var dataResult = JSON.parse(dataResult);
+					if(dataResult.statusCode==200){
+						$('#EditModal').hide();
+						$('#myinfo').empty();
+						$( document ).ready(function() {
+							showinfo().then(results => {
+								
+								buildinfo(results);
+							}).catch(error => {
+								console.log(error.message);
+							})
+						});
+					
+					}
+					else if(dataResult.statusCode==201){
+					   alert("Error occured !");
+					}
+					
+				}
+			});
+		}
+		else{
+			alert('Please fill all the field !');
+		}
+	});
 
 
 async function shownoti(){
@@ -233,7 +327,7 @@ async function shownoti(){
 }
 $( document ).ready(function() {
 				shownoti().then(results => {
-					console.log(results);
+					
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);
@@ -244,7 +338,7 @@ $(document).ready(function(){
 $(document).on('click','#showallnoti',function(){
 	$('#noti').empty();
 	showallnoti().then(results => {
-					console.log(results);
+					
 					buildnoti(results);
 				}).catch(error => {
 					console.log(error.message);
